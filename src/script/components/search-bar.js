@@ -50,7 +50,7 @@ class SearchBar extends HTMLElement {
       }),
     );
   }
- 
+  
   _updateStyle() {
     this._style.textContent = `
       :host {
@@ -88,7 +88,7 @@ class SearchBar extends HTMLElement {
         padding: 14px 10px 0 10px;
         border-inline: none;
         border-block-start: none;
-        border-block-end: 1px solid cornflowerblue;
+        border-block-end: 1px solid pink;
  
         font-size: 1rem;
       }
@@ -102,7 +102,7 @@ class SearchBar extends HTMLElement {
         font-size: 1em;
         font-weight: 700;
         text-transform: uppercase;
-        color: cornflowerblue;
+        color: grey;
  
         white-space: nowrap;
  
@@ -127,7 +127,7 @@ class SearchBar extends HTMLElement {
       .search-form button {
         border: 0;
         padding-inline: 24px;
-        background-color: cornflowerblue;
+        background-color: pink;
  
         text-transform: uppercase;
         font-size: 1rem;
@@ -139,11 +139,11 @@ class SearchBar extends HTMLElement {
       }
  
       .search-form button:hover {
-        background-color: #4485ff;
+        background-color: #e9afb8;
       }
  
       .search-form button:active {
-        background-color: #6c9aee;
+        background-color: pink;
       }
     `;
   }
