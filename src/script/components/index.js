@@ -5,3 +5,4 @@ import './note-item.js';
 import './note-list.js';
 
 import './search-bar.js';
+import './form-note.js';
