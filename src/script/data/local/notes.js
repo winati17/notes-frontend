@@ -112,7 +112,7 @@ class Notes {
   }
   static searchNotes(query = '') {
     return notes.filter((notes) => {
-      const loweredCaseNotes = (notes.strTeam || '-').toLowerCase();
+      const loweredCaseNotes = (notes.title || '-').toLowerCase();
       const jammedNotes = loweredCaseNotes.replace(/\s/g, '');
       const loweredCaseQuery = query.toLowerCase();
       const jammedQuery = loweredCaseQuery.replace(/\s/g, '');
