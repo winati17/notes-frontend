@@ -9,7 +9,7 @@ const home = () => {
   const noteLoadingElement = noteListContainerElement.querySelector('.search-loading');
   const noteListElement = noteListContainerElement.querySelector('note-list');
 
-  const showNotes = (query) => {
+  const showNotes = (query = '') => { 
     showLoading();
 
     const result = Notes.searchNotes(query);
@@ -48,15 +48,8 @@ const home = () => {
     Utils.showElement(noteLoadingElement);
   };
 
-  const showQueryWaiting = () => {
-    Array.from(noteListContainerElement.children).forEach((element) => {
-      Utils.hideElement(element);
-    });
-    Utils.showElement(noteQueryWaitingElement);
-  };
-
   searchFormElement.addEventListener('search', onSearchHandler);
-  showQueryWaiting();
+  showNotes();
 };
 
 export default home;

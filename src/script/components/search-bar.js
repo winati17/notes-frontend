@@ -41,11 +41,9 @@ class SearchBar extends HTMLElement {
   _onSearchBarSubmit() {
     const query = this._shadowRoot.querySelector('input#name').value;
  
-    if (!query) return;
- 
     this.dispatchEvent(
       new CustomEvent(this._searchEvent, {
-        detail: { query },
+        detail: { query: query || '' },
         bubbles: true,
       }),
     );
@@ -157,7 +155,7 @@ class SearchBar extends HTMLElement {
       <div class="floating-form">
         <form id="searchForm" class="search-form">
           <div class="form-group">
-            <input id="name" name="name" type="search" required />
+            <input id="name" name="name" type="search"/>
             <label for="name">Search Note</label>
           </div>
  

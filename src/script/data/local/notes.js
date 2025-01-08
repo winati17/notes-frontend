@@ -111,6 +111,9 @@ class Notes {
     return notes;
   }
   static searchNotes(query = '') {
+    if (!query) {
+      return Notes.getAll(); 
+    }
     return notes.filter((notes) => {
       const loweredCaseNotes = (notes.title || '-').toLowerCase();
       const jammedNotes = loweredCaseNotes.replace(/\s/g, '');
