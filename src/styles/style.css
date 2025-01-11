@@ -32,15 +32,13 @@ label {
 section > .title-section {
   margin-block-end: 2rem;
 
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 /* GLOBAL */
 
 /* Start of Header */
 header {
-  background-color: pink;
-
-  color: black;
+  background-color: #F2BED1;
 }
 
 .app-bar {
@@ -50,7 +48,7 @@ header {
 .app-bar .brand-name {
   margin: 0;
 
-  font-size: 1.7em;
+  font-size: 1.7rem;
 }
 /* End of Header */
 
@@ -103,22 +101,50 @@ main {
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.5);
 }
+
+/* Add spacing between search note and add note containers */
+.search-bar-container {
+  margin-bottom: 24px;
+}
+
+/* Adjust input size for title and body */
+.add-note .form-group label {
+  font-size: 0.9rem;
+}
+
+.add-note .form-group input {
+  font-size: 0.9rem; /* Smaller font size */
+  padding: 10px 8px 4px 8px; /* Reduce gap between text and bottom border */
+  height: 50px; /* Slightly smaller height */
+}
+
+.search-bar .form-group input {
+  font-size: 1rem; /* Slightly larger font for search bar */
+  height: 60px;
+}
+
+.search-bar .form-group label {
+  font-size: 1rem; /* Keep label size consistent with input */
+}
+
+/* Add spacing between sections for clarity */
+.form-container {
+  margin-bottom: 32px; /* Add more space after Add Note form */
+}
+
+.note-list-container {
+  margin-top: 32px;
+}
+
+/* General container spacing */
+.container {
+  padding: 16px; /* Slightly adjust padding for better layout */
+}
+
 /* End of Main */
 
 /* Start of Footer */
 footer {
-  background-color: pink;
-
-  color: black;
-}
-
-footer .container {
-  padding-block: 16px;
-}
-
-.main-footer {
-  padding: 8px 16px;
-
-  text-align: center;
+  background-color: #F2BED1;
 }
 /* End of Footer */

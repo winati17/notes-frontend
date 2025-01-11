@@ -25,7 +25,7 @@ class AddNote extends HTMLElement {
   
     titleInput.addEventListener('blur', () => {
       if (!titleInput.value.trim()) {
-        titleValidation.textContent = 'Masukkan judul.';
+        titleValidation.textContent = 'Insert title';
       } else {
         titleValidation.textContent = '';
       }
@@ -33,7 +33,7 @@ class AddNote extends HTMLElement {
   
     bodyInput.addEventListener('blur', () => {
       if (!bodyInput.value.trim()) {
-        bodyValidation.textContent = 'Masukkan isi.';
+        bodyValidation.textContent = 'Insert body';
       } else {
         bodyValidation.textContent = '';
       }
@@ -84,107 +84,119 @@ class AddNote extends HTMLElement {
       :host {
         display: inline;
       }
-
-      .container {
-      width: 1024px;
-      border-radius: 8px;
-      margin: 16px;
-      background: #F8F9FA;
-      padding: 16px;
-      flex-grow: 1;
-      height: fit-content;
-      
+  
+      .floating-form {
+        background-color: white;
+        padding: 16px;
+        border-radius: 5px;
+        position: sticky;
+        top: 10px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+      }
+  
       .form {
-      display: flex;
-      padding: 16px;
-      flex-direction: column;
-      height: 300px;
-      border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
       }
-
+  
       .form-group {
-          display: flex;
-          flex-direction: column;
+        position: relative;
       }
-
+  
+      .form-group input,
+      .form-group textarea {
+        display: block;
+        width: 100%;
+        padding: 14px 10px 0 10px;
+        border: none;
+        border-bottom: 1px solid #F2BED1;
+        font-size: 1rem;
+        background: none;
+        transition: border-color 0.2s ease-in-out;
+      }
+  
+      .form-group input:focus-visible,
+      .form-group textarea:focus-visible {
+        outline: 0;
+        border-bottom: 2px solid #F2BED1;
+      }
+  
       .form-group label {
-          margin-bottom: 4px;
-          font-size: 18px;
-          font-weight: lighter;
+        line-height: 60px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: grey;
+        white-space: nowrap;
+        position: absolute;
+        top: 0;
+        left: 10px;
+        user-select: none;
+        pointer-events: none;
+        transition: 150ms all ease-in-out;
       }
-
-      input[type=text], input[type=textarea] {
-          font-family: Raleway, sans-serif;
-          background: #F5F1FF;
-          border: 2px solid #9475EA;
-          border-radius: 8px;
-          padding: 16px;
-          box-sizing: border-box;
-          margin-bottom: 8px;
-          font-size: 24px;
+  
+      .form-group input:focus-visible ~ label,
+      .form-group input:not(:placeholder-shown) ~ label,
+      .form-group textarea:focus-visible ~ label,
+      .form-group textarea:not(:placeholder-shown) ~ label {
+        left: 10px;
+        top: -16px;
+        font-size: 0.8rem;
+        color: #F2BED1;
       }
-
+  
       .btn-submit {
-          width: fit-content;
-          font-family: Raleway, sans-serif;
-          border-radius: 16px;
-          padding: 12px 24px;
-          border: 2px solid #5F30E2;
-          color: black;
-          font-size: 24px;
-          margin-top: auto;
-          align-self: flex-end;
-          cursor: pointer;
+        border: 0;
+        padding: 12px 24px;
+        background-color: #FDCEDF;
+        text-transform: uppercase;
+        font-size: 1rem;
+        color: white;
+        cursor: pointer;
+        transition: 100ms linear;
       }
-
+  
       .btn-submit:hover {
-          background: #5F30E2;
-          color: white;
+        background-color: #F2BED1;
       }
-
-      input[type=text], input[type=textarea], .btn-submit:focus {
-          outline: none;
+  
+      .btn-submit:active {
+        background-color: #FDCEDF;
       }
-
-      .text-center {
-          text-align: center;
-      }
-
-      .form-title {
-          margin: auto 0;
-      }
-
+  
       .validation-message {
-      color: red;
-      font-size: 14px;
-      margin-top: 4px;
+        color: red;
+        font-size: 0.8rem;
+        margin-top: 4px;
       }
     `;
-  }
+  }  
 
   render() {
     this._emptyContent();
     this._updateStyle();
-
+  
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `
-    <div class="container" id="add-todo">
-      <form autocomplete="off" class="form" action="#" id="form">
-        <div class="form-group form-title">
-          <label for="title">Judul</label>
-          <input type="text" id="title" name="title" required>
-          <span class="validation-message" id="title-validation"></span>
-        </div>
-        <div class="form-group form-title">
-          <label for="body">Isi</label>
-          <input type="textarea" id="body" name="body" required>
-          <span class="validation-message" id="body-validation"></span>
-        </div>
-        <input type="submit" value="Submit" name="Submit" class="btn-submit">
-      </form>
-    </div>
+      <div class="floating-form" id="add-todo">
+        <form autocomplete="off" class="form" id="form">
+          <div class="form-group">
+            <input type="text" id="title" name="title" required placeholder="">
+            <label for="title">Title</label>
+            <span class="validation-message" id="title-validation"></span>
+          </div>
+          <div class="form-group">
+            <textarea id="body" name="body" required placeholder=""></textarea>
+            <label for="body">Body</label>
+            <span class="validation-message" id="body-validation"></span>
+          </div>
+          <button type="submit" class="btn-submit">Add Note</button>
+        </form>
+      </div>
     `;
-  }
+  }  
 }
 
 customElements.define('add-note', AddNote);

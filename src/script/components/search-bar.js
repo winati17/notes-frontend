@@ -54,94 +54,77 @@ class SearchBar extends HTMLElement {
       :host {
         display: inline;
       }
-    
+  
       .floating-form {
         background-color: white;
         padding: 16px;
         border-radius: 5px;
- 
-        position: sticky;
         top: 10px;
- 
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
       }
- 
+  
       .search-form {
         display: flex;
         gap: 16px;
       }
- 
-      .search-form .form-group {
+  
+      .form-group {
         flex-grow: 1;
- 
         position: relative;
       }
- 
-      .search-form .form-group input {
+  
+      .form-group input {
         display: block;
- 
         width: 100%;
         height: 60px;
- 
         padding: 14px 10px 0 10px;
-        border-inline: none;
-        border-block-start: none;
-        border-block-end: 1px solid pink;
- 
+        border: none;
+        border-bottom: 1px solid #F2BED1;
         font-size: 1rem;
+        background: none;
+        transition: border-color 0.2s ease-in-out;
       }
- 
-      .search-form .form-group input:focus-visible {
-        outline: 0;
-      }
- 
-      .search-form .form-group label {
+  
+      .form-group label {
         line-height: 60px;
-        font-size: 1em;
+        font-size: 1rem;
         font-weight: 700;
         text-transform: uppercase;
         color: grey;
- 
         white-space: nowrap;
- 
         position: absolute;
         top: 0;
-        left: 20px;
- 
+        left: 10px;
         user-select: none;
         pointer-events: none;
- 
         transition: 150ms all ease-in-out;
       }
- 
-      .search-form .form-group input:focus-visible ~ label,
-      .search-form .form-group input:valid ~ label {
+  
+      .form-group input:focus-visible ~ label,
+      .form-group input:not(:placeholder-shown) ~ label {
         left: 10px;
         top: -16px;
- 
-        font-size: 0.8em;
+        font-size: 0.8rem;
+        color: #F2BED1;
       }
- 
+  
       .search-form button {
         border: 0;
         padding-inline: 24px;
-        background-color: pink;
- 
+        background-color: #FDCEDF;
         text-transform: uppercase;
         font-size: 1rem;
         color: white;
- 
         cursor: pointer;
- 
         transition: 100ms linear;
       }
- 
+  
       .search-form button:hover {
-        background-color: #e9afb8;
+        background-color: #F2BED1;
       }
- 
+  
       .search-form button:active {
-        background-color: pink;
+        background-color: #FDCEDF;
       }
     `;
   }
@@ -149,21 +132,20 @@ class SearchBar extends HTMLElement {
   render() {
     this._emptyContent();
     this._updateStyle();
- 
+  
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `
       <div class="floating-form">
         <form autocomplete="off" id="searchForm" class="search-form">
           <div class="form-group">
-            <input id="name" name="name" type="search"/>
-            <label for="name">Search Note</label>
+            <input id="name" name="name" type="search" placeholder="" required />
+            <label for="name">Search</label>
           </div>
- 
-          <button>Search</button>
+          <button type="submit">Search</button>
         </form>
       </div>
     `;
-  }
+  }  
 }
  
 customElements.define('search-bar', SearchBar);

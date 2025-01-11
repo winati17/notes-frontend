@@ -133,12 +133,18 @@ class Notes {
       return notes;
     }
     return notes.filter((note) => {
-      const loweredCaseNotes = (note.title || '-').toLowerCase();
-      const jammedNotes = loweredCaseNotes.replace(/\s/g, '');
-      const loweredCaseQuery = query.toLowerCase();
-      const jammedQuery = loweredCaseQuery.replace(/\s/g, '');
-      return jammedNotes.indexOf(jammedQuery) !== -1;
-    });
+      const loweredTitle = (note.title || '-').toLowerCase();
+      const loweredBody = (note.body || '-').toLowerCase();
+      const jammedTitle = loweredTitle.replace(/\s/g, '');
+      const jammedBody = loweredBody.replace(/\s/g, '');
+      const loweredQuery = query.toLowerCase();
+      const jammedQuery = loweredQuery.replace(/\s/g, '');
+
+      return (
+        jammedTitle.indexOf(jammedQuery) !== -1 || 
+        jammedBody.indexOf(jammedQuery) !== -1
+      );
+    });  
   }
 }
 

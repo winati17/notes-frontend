@@ -63,7 +63,7 @@ class NoteItem extends HTMLElement {
  
         text-overflow: ellipsis;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 5; /* number of lines to show */
+        -webkit-line-clamp: 5; 
       }
     `;
   }

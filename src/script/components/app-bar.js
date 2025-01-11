@@ -27,7 +27,7 @@ class AppBar extends HTMLElement {
       .brand-name {
         margin: 0;
       
-        font-size: 1.7em;
+        font-size: 1.7rem;
       }
     `;
   }

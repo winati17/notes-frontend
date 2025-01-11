@@ -28,9 +28,8 @@ class NoteList extends HTMLElement {
       
       .list {
         display: grid;
-        grid-template-columns: ${'1fr '.repeat(this.column)};
-      
-        gap: ${this.gutter}px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: ${this._gutter}px;
       }
     `;
   }
