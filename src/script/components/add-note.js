@@ -1,4 +1,4 @@
-class FormNote extends HTMLElement {
+class AddNote extends HTMLElement {
   _shadowRoot = null;
   _style = null;
 
@@ -7,7 +7,6 @@ class FormNote extends HTMLElement {
 
     this._shadowRoot = this.attachShadow({ mode: 'open' });
     this._style = document.createElement('style');
-
     this.render();
   }
 
@@ -18,31 +17,43 @@ class FormNote extends HTMLElement {
   connectedCallback() {
     this._shadowRoot
       .querySelector('form')
-      .addEventListener('submit', (event) => this._onFormSubmit(event, this));
-    this.addEventListener(this._submitEvent, this._onSearchBarSubmit);
+      .addEventListener('submit', (event) => this._onFormSubmit(event));
   }
 
   disconnectedCallback() {
     this._shadowRoot
       .querySelector('form')
-      .removeEventListener('submit', (event) => this._onFormSubmit(event, this));
-    this.removeEventListener(this._submitEvent, this._onSearchBarSubmit);
+      .removeEventListener('submit', (event) => this._onFormSubmit(event));
   }
 
-  _onFormSubmit(event, searchBarInstance) {
-    searchBarInstance.dispatchEvent(new CustomEvent('submit'));
-
+  _onFormSubmit(event) {
     event.preventDefault();
-  }
 
-  _onSearchBarSubmit() {
-    const query = this._shadowRoot.querySelector('input#name').value;
+    const title = this._shadowRoot.querySelector('input#title').value.trim();
+    const body = this._shadowRoot.querySelector('input#body').value.trim();
 
-    if (!query) return;
+    if (!title || !body) {
+      alert('Please fill in both the title and body!');
+      return;
+    }
+
+    const newNote = {
+      id: `notes-${Date.now()}`,
+      title,
+      body,
+      createdAt: new Date().toISOString(),
+      archived: false,
+    };
+
+    const existingNotes = JSON.parse(localStorage.getItem('NOTES_APPS')) || [];
+    existingNotes.push(newNote);
+    localStorage.setItem('NOTES_APPS', JSON.stringify(existingNotes));
+
+    this._shadowRoot.querySelector('form').reset();
 
     this.dispatchEvent(
-      new CustomEvent(this._searchEvent, {
-        detail: { query },
+      new CustomEvent('noteAdded', {
+        detail: { newNote },
         bubbles: true,
       }),
     );
@@ -132,7 +143,7 @@ class FormNote extends HTMLElement {
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `
     <div class="container" id="add-todo">
-      <form class="form" action="#" id="form">
+      <form autocomplete="off" class="form" action="#" id="form">
         <div class="form-group form-title">
           <label for="title">Judul</label>
           <input type="text" id="title" name="title" required>
@@ -148,4 +159,4 @@ class FormNote extends HTMLElement {
   }
 }
 
-customElements.define('form-note', FormNote);
+customElements.define('add-note', AddNote);

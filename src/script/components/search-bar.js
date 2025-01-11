@@ -153,7 +153,7 @@ class SearchBar extends HTMLElement {
     this._shadowRoot.appendChild(this._style);
     this._shadowRoot.innerHTML += `
       <div class="floating-form">
-        <form id="searchForm" class="search-form">
+        <form autocomplete="off" id="searchForm" class="search-form">
           <div class="form-group">
             <input id="name" name="name" type="search"/>
             <label for="name">Search Note</label>

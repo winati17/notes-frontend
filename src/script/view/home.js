@@ -3,9 +3,9 @@ import Notes from '../data/local/notes.js';
 
 const home = () => {
   const searchFormElement = document.querySelector('search-bar');
+  const addNoteElement = document.querySelector('add-note');
 
   const noteListContainerElement = document.querySelector('#noteListContainer');
-  const noteQueryWaitingElement = noteListContainerElement.querySelector('.query-waiting');
   const noteLoadingElement = noteListContainerElement.querySelector('.search-loading');
   const noteListElement = noteListContainerElement.querySelector('note-list');
 
@@ -22,6 +22,13 @@ const home = () => {
     event.preventDefault();
     const { query } = event.detail;
     showNotes(query);
+  };
+
+  const onNoteAddedHandler = (event) => {
+    const newNote = event.detail.newNote;
+    console.log('New note added:', newNote);
+
+    showNotes();
   };
 
   const displayResult = (notes) => {
@@ -47,6 +54,8 @@ const home = () => {
     });
     Utils.showElement(noteLoadingElement);
   };
+
+  addNoteElement.addEventListener('noteAdded', onNoteAddedHandler);
 
   searchFormElement.addEventListener('search', onSearchHandler);
   showNotes();

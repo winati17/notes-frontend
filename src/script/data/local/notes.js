@@ -106,16 +106,34 @@ const notes = [
   },
 ];
 
+const NOTES_APPS_KEY = 'NOTES_APPS';
+
+if (!localStorage.getItem(NOTES_APPS_KEY)) {
+  localStorage.setItem(NOTES_APPS_KEY, JSON.stringify(notes));
+}
+
 class Notes {
   static getAll() {
-    return notes;
+    return JSON.parse(localStorage.getItem(NOTES_APPS_KEY)) || [];
   }
+
+  static saveAll(notes) {
+    localStorage.setItem(NOTES_APPS_KEY, JSON.stringify(notes));
+  }
+
+  static addNote(newNote) {
+    const currentNotes = Notes.getAll();
+    currentNotes.push(newNote);
+    Notes.saveAll(currentNotes);
+  }
+
   static searchNotes(query = '') {
+    const notes = Notes.getAll();
     if (!query) {
-      return Notes.getAll(); 
+      return notes;
     }
-    return notes.filter((notes) => {
-      const loweredCaseNotes = (notes.title || '-').toLowerCase();
+    return notes.filter((note) => {
+      const loweredCaseNotes = (note.title || '-').toLowerCase();
       const jammedNotes = loweredCaseNotes.replace(/\s/g, '');
       const loweredCaseQuery = query.toLowerCase();
       const jammedQuery = loweredCaseQuery.replace(/\s/g, '');
@@ -125,3 +143,4 @@ class Notes {
 }
 
 export default Notes;
+
