@@ -15,9 +15,29 @@ class AddNote extends HTMLElement {
   }
 
   connectedCallback() {
-    this._shadowRoot
-      .querySelector('form')
-      .addEventListener('submit', (event) => this._onFormSubmit(event));
+    const form = this._shadowRoot.querySelector('form');
+    const titleInput = this._shadowRoot.querySelector('input#title');
+    const bodyInput = this._shadowRoot.querySelector('input#body');
+    const titleValidation = this._shadowRoot.querySelector('#title-validation');
+    const bodyValidation = this._shadowRoot.querySelector('#body-validation');
+  
+    form.addEventListener('submit', (event) => this._onFormSubmit(event));
+  
+    titleInput.addEventListener('blur', () => {
+      if (!titleInput.value.trim()) {
+        titleValidation.textContent = 'Masukkan judul.';
+      } else {
+        titleValidation.textContent = '';
+      }
+    });
+  
+    bodyInput.addEventListener('blur', () => {
+      if (!bodyInput.value.trim()) {
+        bodyValidation.textContent = 'Masukkan isi.';
+      } else {
+        bodyValidation.textContent = '';
+      }
+    });
   }
 
   disconnectedCallback() {
@@ -133,6 +153,12 @@ class AddNote extends HTMLElement {
       .form-title {
           margin: auto 0;
       }
+
+      .validation-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 4px;
+      }
     `;
   }
 
@@ -147,10 +173,12 @@ class AddNote extends HTMLElement {
         <div class="form-group form-title">
           <label for="title">Judul</label>
           <input type="text" id="title" name="title" required>
+          <span class="validation-message" id="title-validation"></span>
         </div>
         <div class="form-group form-title">
           <label for="body">Isi</label>
           <input type="textarea" id="body" name="body" required>
+          <span class="validation-message" id="body-validation"></span>
         </div>
         <input type="submit" value="Submit" name="Submit" class="btn-submit">
       </form>
