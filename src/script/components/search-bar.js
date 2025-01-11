@@ -7,10 +7,8 @@ class SearchBar extends HTMLElement {
  
   constructor() {
     super();
- 
     this._shadowRoot = this.attachShadow({ mode: 'open' });
     this._style = document.createElement('style');
- 
     this.render();
   }
  
@@ -34,27 +32,25 @@ class SearchBar extends HTMLElement {
  
   _onFormSubmit(event, searchBarInstance) {
     searchBarInstance.dispatchEvent(new CustomEvent('submit'));
- 
     event.preventDefault();
   }
- 
+
   _onSearchBarSubmit() {
     const query = this._shadowRoot.querySelector('input#name').value;
- 
     this.dispatchEvent(
       new CustomEvent(this._searchEvent, {
         detail: { query: query || '' },
         bubbles: true,
-      }),
+      })
     );
   }
-  
+
   _updateStyle() {
     this._style.textContent = `
       :host {
         display: inline;
       }
-  
+
       .floating-form {
         background-color: white;
         padding: 16px;
@@ -62,7 +58,7 @@ class SearchBar extends HTMLElement {
         top: 10px;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
       }
-  
+
       .search-form {
         display: flex;
         gap: 16px;
@@ -138,8 +134,8 @@ class SearchBar extends HTMLElement {
   render() {
     this._emptyContent();
     this._updateStyle();
-  
     this._shadowRoot.appendChild(this._style);
+
     this._shadowRoot.innerHTML += `
       <div class="floating-form">
         <form autocomplete="off" id="searchForm" class="search-form">

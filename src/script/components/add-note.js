@@ -4,7 +4,6 @@ class AddNote extends HTMLElement {
 
   constructor() {
     super();
-
     this._shadowRoot = this.attachShadow({ mode: 'open' });
     this._style = document.createElement('style');
     this.render();
@@ -20,9 +19,9 @@ class AddNote extends HTMLElement {
     const bodyInput = this._shadowRoot.querySelector('textarea#body');
     const titleValidation = this._shadowRoot.querySelector('#title-validation');
     const bodyValidation = this._shadowRoot.querySelector('#body-validation');
-  
+
     form.addEventListener('submit', (event) => this._onFormSubmit(event));
-  
+
     titleInput.addEventListener('blur', () => {
       if (!titleInput.value.trim()) {
         titleValidation.textContent = 'Insert title';
@@ -30,7 +29,7 @@ class AddNote extends HTMLElement {
         titleValidation.textContent = '';
       }
     });
-  
+
     bodyInput.addEventListener('blur', () => {
       if (!bodyInput.value.trim()) {
         bodyValidation.textContent = 'Insert body';
@@ -48,9 +47,8 @@ class AddNote extends HTMLElement {
 
   _onFormSubmit(event) {
     event.preventDefault();
-
     const title = this._shadowRoot.querySelector('input#title').value.trim();
-    const body = this._shadowRoot.querySelector('input#body').value.trim();
+    const body = this._shadowRoot.querySelector('textarea#body').value.trim();
 
     if (!title || !body) {
       alert('Please fill in both the title and body!');
@@ -75,7 +73,7 @@ class AddNote extends HTMLElement {
       new CustomEvent('noteAdded', {
         detail: { newNote },
         bubbles: true,
-      }),
+      })
     );
   }
 
@@ -84,27 +82,26 @@ class AddNote extends HTMLElement {
       :host {
         display: inline;
       }
-  
+
       .floating-form {
         background-color: white;
         padding: 16px;
         border-radius: 5px;
-        position: sticky;
         top: 10px;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
       }
-  
+
       .form {
         display: flex;
         flex-direction: column;
         gap: 16px;
       }
-  
+
       .form-group {
         position: relative;
         width: 100%;
       }
-  
+
       .form-group input,
       .form-group textarea {
         display: block;
@@ -114,16 +111,17 @@ class AddNote extends HTMLElement {
         border-radius: 4px;
         font-size: 1rem;
         background: none;
+        box-sizing: border-box;
         transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
       }
-  
+
       .form-group input:focus-visible,
       .form-group textarea:focus-visible {
         outline: none;
         border-color: #F2BED1;
         box-shadow: 0 0 8px rgba(242, 190, 209, 0.5);
       }
-  
+
       .form-group label {
         position: absolute;
         top: 16px;
@@ -136,7 +134,7 @@ class AddNote extends HTMLElement {
         padding: 0 4px;
         transition: 150ms all ease-in-out;
       }
-  
+
       .form-group input:focus-visible ~ label,
       .form-group input:not(:placeholder-shown) ~ label,
       .form-group textarea:focus-visible ~ label,
@@ -146,7 +144,7 @@ class AddNote extends HTMLElement {
         font-size: 0.8rem;
         color: #F2BED1;
       }
-  
+
       .btn-submit {
         width: 100%;
         border: none;
@@ -158,28 +156,28 @@ class AddNote extends HTMLElement {
         cursor: pointer;
         transition: 100ms linear;
       }
-  
+
       .btn-submit:hover {
         background-color: #F2BED1;
       }
-  
+
       .btn-submit:active {
         background-color: #FDCEDF;
       }
-  
+
       .validation-message {
         color: red;
         font-size: 0.8rem;
         margin-top: 4px;
       }
     `;
-  }  
+  }
 
   render() {
     this._emptyContent();
     this._updateStyle();
-  
     this._shadowRoot.appendChild(this._style);
+
     this._shadowRoot.innerHTML += `
       <div class="floating-form" id="add-todo">
         <form autocomplete="off" class="form" id="form">
@@ -197,7 +195,7 @@ class AddNote extends HTMLElement {
         </form>
       </div>
     `;
-  }  
+  }
 }
 
 customElements.define('add-note', AddNote);

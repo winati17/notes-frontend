@@ -1,7 +1,7 @@
+/* Reset and Global Defaults */
 * {
   padding: 0;
   margin: 0;
-
   box-sizing: border-box;
 }
 
@@ -9,18 +9,16 @@ body {
   font-family: sans-serif;
 }
 
-/* GLOBAL */
+/* Container, cards, generic classes */
 .container {
   max-width: 800px;
-
+  margin-inline: auto;
   padding-block: 32px;
   padding-inline: 16px;
-  margin-inline: auto;
 }
 
 .card {
   border-radius: 8px;
-
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
@@ -31,12 +29,10 @@ label {
 
 section > .title-section {
   margin-block-end: 2rem;
-
   font-size: 1.2rem;
 }
-/* GLOBAL */
 
-/* Start of Header */
+/* Header */
 header {
   background-color: #F2BED1;
 }
@@ -47,56 +43,21 @@ header {
 
 .app-bar .brand-name {
   margin: 0;
-
   font-size: 1.7rem;
 }
-/* End of Header */
 
-/* Start of Main */
+/* Main */
 main {
   min-height: 100vh;
 }
 
+/* Note list container placeholder styling */
 .note-list-container {
   margin-block-start: 32px;
 }
 
-.note-list .list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.note-list .list .card .fan-art-note {
-  width: 100%;
-  max-height: 450px;
-
-  object-fit: cover;
-  object-position: center;
-}
-
-.note-list .list .card .note-info {
-  padding: 16px 24px;
-}
-
-.note-list .list .card .note-info__title h2 {
-  font-weight: lighter;
-}
-
-.note-list .list .card .note-info__description p {
-  display: -webkit-box;
-  margin-top: 10px;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
-}
-
 .note-list-container .placeholder {
   margin-block: 1rem;
-
   font-size: 1.5rem;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.5);
@@ -107,44 +68,11 @@ main {
   margin-bottom: 24px;
 }
 
-/* Adjust input size for title and body */
-.add-note .form-group label {
-  font-size: 0.9rem;
-}
-
-.add-note .form-group input {
-  font-size: 0.9rem; /* Smaller font size */
-  padding: 10px 8px 4px 8px; /* Reduce gap between text and bottom border */
-  height: 50px; /* Slightly smaller height */
-}
-
-.search-bar .form-group input {
-  font-size: 1rem; /* Slightly larger font for search bar */
-  height: 60px;
-}
-
-.search-bar .form-group label {
-  font-size: 1rem; /* Keep label size consistent with input */
-}
-
-/* Add spacing between sections for clarity */
 .form-container {
-  margin-bottom: 32px; /* Add more space after Add Note form */
+  margin-bottom: 32px;
 }
 
-.note-list-container {
-  margin-top: 32px;
-}
-
-/* General container spacing */
-.container {
-  padding: 16px; /* Slightly adjust padding for better layout */
-}
-
-/* End of Main */
-
-/* Start of Footer */
+/* Footer */
 footer {
   background-color: #F2BED1;
 }
-/* End of Footer */
