@@ -77,12 +77,18 @@ class SearchBar extends HTMLElement {
         display: block;
         width: 100%;
         height: 60px;
-        padding: 14px 10px 0 10px;
-        border: none;
-        border-bottom: 1px solid #F2BED1;
+        padding: 16px 10px 6px 10px;
+        border: 1px solid #ccc; 
+        border-radius: 4px;
         font-size: 1rem;
         background: none;
-        transition: border-color 0.2s ease-in-out;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+  
+      .form-group input:focus-visible {
+        outline: none;
+        border-color: #F2BED1; 
+        box-shadow: 0 0 8px rgba(242, 190, 209, 0.5);
       }
   
       .form-group label {
@@ -127,7 +133,7 @@ class SearchBar extends HTMLElement {
         background-color: #FDCEDF;
       }
     `;
-  }
+  }  
  
   render() {
     this._emptyContent();

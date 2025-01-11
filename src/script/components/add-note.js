@@ -17,7 +17,7 @@ class AddNote extends HTMLElement {
   connectedCallback() {
     const form = this._shadowRoot.querySelector('form');
     const titleInput = this._shadowRoot.querySelector('input#title');
-    const bodyInput = this._shadowRoot.querySelector('input#body');
+    const bodyInput = this._shadowRoot.querySelector('textarea#body');
     const titleValidation = this._shadowRoot.querySelector('#title-validation');
     const bodyValidation = this._shadowRoot.querySelector('#body-validation');
   
@@ -102,38 +102,38 @@ class AddNote extends HTMLElement {
   
       .form-group {
         position: relative;
+        width: 100%;
       }
   
       .form-group input,
       .form-group textarea {
         display: block;
         width: 100%;
-        padding: 14px 10px 0 10px;
-        border: none;
-        border-bottom: 1px solid #F2BED1;
+        padding: 16px 10px 6px 10px;
+        border: 1px solid #ccc; 
+        border-radius: 4px;
         font-size: 1rem;
         background: none;
-        transition: border-color 0.2s ease-in-out;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
       }
   
       .form-group input:focus-visible,
       .form-group textarea:focus-visible {
-        outline: 0;
-        border-bottom: 2px solid #F2BED1;
+        outline: none;
+        border-color: #F2BED1;
+        box-shadow: 0 0 8px rgba(242, 190, 209, 0.5);
       }
   
       .form-group label {
-        line-height: 60px;
-        font-size: 0.9rem;
+        position: absolute;
+        top: 16px;
+        left: 10px;
+        font-size: 1rem;
         font-weight: 700;
         text-transform: uppercase;
         color: grey;
-        white-space: nowrap;
-        position: absolute;
-        top: 0;
-        left: 10px;
-        user-select: none;
-        pointer-events: none;
+        background: white;
+        padding: 0 4px;
         transition: 150ms all ease-in-out;
       }
   
@@ -141,14 +141,15 @@ class AddNote extends HTMLElement {
       .form-group input:not(:placeholder-shown) ~ label,
       .form-group textarea:focus-visible ~ label,
       .form-group textarea:not(:placeholder-shown) ~ label {
-        left: 10px;
-        top: -16px;
+        top: -10px;
+        left: 8px;
         font-size: 0.8rem;
         color: #F2BED1;
       }
   
       .btn-submit {
-        border: 0;
+        width: 100%;
+        border: none;
         padding: 12px 24px;
         background-color: #FDCEDF;
         text-transform: uppercase;
